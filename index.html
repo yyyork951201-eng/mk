@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>QR∞｜一碼，不只一種可能</title>
+
+  <style>
+    .btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin-right: 10px;
+  border: 1.5px solid var(--blue);
+  border-radius: 999px;
+  color: var(--blue);
+  background: white;
+  font-size: 15px;
+  font-weight: 700;
+  transition: all .25s ease;
+  cursor: pointer;
+}
+
+/* 滑鼠移上去 */
+.btn:hover {
+  color: white;
+  background: var(--blue);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(36, 87, 255, .25);
+}
+
+/* 按下去 */
+.btn:active {
+  transform: translateY(-1px) scale(.96);
+  box-shadow: 0 4px 10px rgba(36, 87, 255, .2);
+}
+
+
+/* 立即試用 */
+.btn-primary {
+  color: white;
+  background: linear-gradient(135deg, #2457ff, #7c5cff);
+  border-color: transparent;
+}
+
+/* 滑鼠移到立即試用 */
+.btn-primary:hover {
+  color: white;
+  background: linear-gradient(135deg, #1945dc, #6948ed);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow:
+    0 12px 30px rgba(36, 87, 255, .35),
+    0 0 20px rgba(124, 92, 255, .2);
+}
+    :root {
+      --blue: #2457ff;
+      --dark: #111827;
+      --gray: #667085;
+      --light: #f5f7fb;
+      --line: #e5e7eb;
+      --white: #ffffff;
+      --purple: #7c5cff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+  font-family:
+    "Noto Serif TC",
+    "PMingLiU",
+    "新細明體",
+    "MingLiU",
+    serif;
+}
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ===== Header ===== */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      max-width: 1180px;
+      margin: auto;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 14px;
+      color: #475467;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    /* ===== Hero / News ===== */
+
+    .hero {
+      background:
+        radial-gradient(circle at 80% 20%, rgba(36,87,255,.13), transparent 30%),
+        linear-gradient(180deg, #f8faff 0%, #fff 100%);
+      padding: 100px 24px 80px;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: auto;
+    }
+
+    .category {
+      display: inline-block;
+      color: var(--blue);
+      background: #eaf0ff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .date {
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      max-width: 900px;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.12;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .lead {
+      max-width: 780px;
+      color: #475467;
+      font-size: 20px;
+      line-height: 1.9;
+    }
+
+    .hero-line {
+      margin-top: 50px;
+      height: 5px;
+      width: 100%;
+      background: linear-gradient(
+        90deg,
+        var(--blue),
+        var(--purple),
+        transparent
+      );
+      border-radius: 10px;
+    }
+
+    /* ===== Main ===== */
+
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 80px 24px;
+    }
+
+    section {
+      margin-bottom: 110px;
+    }
+
+    .section-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.3;
+      letter-spacing: -1.5px;
+      margin-bottom: 25px;
+    }
+
+    h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .article {
+    max-width: 760px;
+    font-size: 17px;
+    color: #344054;
+  }
+
+  .article p {
+    margin-bottom: 24px;
+  }
+
+  /* ===== 新聞報導首字放大 ===== */
+
+  .article p:first-child::first-letter {
+    float: left;
+    font-size: 6.2em;
+    line-height: 0.78;
+    font-weight: 900;
+    color: var(--blue);
+    padding-right: 12px;
+    padding-top: 8px;
+    font-family: Georgia, "Times New Roman", serif;
+  }
+
+  /* 手機版 */
+  @media (max-width: 600px) {
+    .article p:first-child::first-letter {
+      font-size: 4.8em;
+      padding-right: 8px;
+    }
+  }
+    /* ===== Quote ===== */
+
+    .quote {
+      margin: 45px 0;
+      padding: 35px;
+      border-left: 5px solid var(--blue);
+      background: var(--light);
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.7;
+    }
+
+    .quote small {
+      display: block;
+      margin-top: 15px;
+      color: var(--gray);
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    /* ===== Feature cards ===== */
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 35px;
+    }
+
+    .card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: white;
+      transition: .25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(16,24,40,.08);
+    }
+
+    .icon {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    /* ===== Flow ===== */
+
+    .flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 40px 0;
+    }
+
+    .flow-item {
+      padding: 15px 20px;
+      background: #f8f9fc;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      font-weight: 700;
+    }
+
+    .arrow {
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    /* ===== QR Visual ===== */
+
+    .qr-section {
+      background: #111827;
+      color: white;
+      border-radius: 30px;
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 60px;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .qr-section h2 {
+      color: white;
+    }
+
+    .qr-section p {
+      color: #cbd5e1;
+    }
+
+    .fake-qr {
+      width: 230px;
+      height: 230px;
+      background:
+        linear-gradient(90deg, #fff 10px, transparent 10px) 0 0 / 30px 30px,
+        linear-gradient(#fff 10px, transparent 10px) 0 0 / 30px 30px,
+        #111827;
+      border: 14px solid white;
+      border-radius: 15px;
+      margin: auto;
+      position: relative;
+    }
+
+    .fake-qr::after {
+      content: "∞";
+      position: absolute;
+      inset: 50px;
+      display: grid;
+      place-items: center;
+      background: white;
+      color: #111827;
+      border-radius: 10px;
+      font-size: 42px;
+      font-weight: 900;
+    }
+
+    /* ===== Data ===== */
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .data {
+      padding: 25px 15px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .data strong {
+      display: block;
+      color: var(--blue);
+      font-size: 32px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .data span {
+      color: var(--gray);
+      font-size: 13px;
+    }
+
+    /* ===== Marketing ===== */
+
+    .marketing {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 35px;
+    }
+
+    .marketing-card {
+      background: var(--light);
+      padding: 30px;
+      border-radius: 20px;
+    }
+
+    .marketing-card strong {
+      color: var(--blue);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    /* ===== Closing ===== */
+
+    .closing {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(135deg, #eef3ff, #f7f4ff);
+      border-radius: 30px;
+    }
+
+    .closing h2 {
+      max-width: 700px;
+      margin: auto auto 20px;
+    }
+
+    .closing p {
+      color: var(--gray);
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .infinite {
+      color: var(--blue);
+      font-size: 80px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 25px;
+    }
+
+    /* ===== Footer ===== */
+
+    footer {
+      background: #111827;
+      color: #98a2b3;
+      padding: 45px 24px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: white;
+    }
+
+    /* ===== Responsive ===== */
+
+    @media (max-width: 800px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 70px 20px 60px;
+      }
+
+      main {
+        padding: 60px 20px;
+      }
+
+      section {
+        margin-bottom: 80px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .data-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .marketing {
+        grid-template-columns: 1fr;
+      }
+
+      .qr-section {
+        grid-template-columns: 1fr;
+        padding: 40px 25px;
+        text-align: center;
+      }
+
+      .quote {
+        font-size: 19px;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+    }
+    .user-scene-image {
+  width: 50%;
+  border-radius: 24px;
+  display: block;
+   margin: 0 auto;
+  box-shadow: 0 20px 50px rgba(16, 24, 40, .15);
+  transition: .3s ease;
+}
+    .user-scene-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 60px rgba(16, 24, 40, .2);
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Header ===== -->
+
+  <header>
+    <nav class="nav">
+      <div class="logo">QR<span>∞</span></div>
+
+      <div class="nav-links">
+        <a href="#story">報導</a>
+        <a href="#technology">應用</a>
+        <a href="#data">數據</a>
+        
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- ===== Hero ===== -->
+
+  <div class="hero">
+    <div class="hero-inner">
+
+      <div class="category">
+        未來科技 × 智慧商務
+      </div>
+
+      <div class="date">
+        2030 年 5 月 18 日｜校園科技新聞
+      </div>
+
+      <h1>
+        一個 QR Code，<br>
+        <span>可以變成任何你需要的服務。</span>
+      </h1>
+
+      <p class="lead">
+        從點名、投票到點餐系統，
+        讓使用者不用學程式，也能依照自己的需求快速建立數位互動服務。
+      </p>
+
+      <div class="hero-line"></div>
+
+    </div>
+  </div>
+<div>
+      <img
+        src="0001.png"
+        alt="QR∞ 使用者掃描 QR Code 的情境"
+        class="user-scene-image"
+      >
+    </div>
+
+  <main>
+
+    <!-- ===== Story ===== -->
+
+    <section id="story">
+
+  <div class="section-label"></div>
+
+  
+
+  <div class="article">
+
+    <p>
+      讓數位服務隨想法而變，QR Code 已經出現在我們生活中的各個角落。
+      餐廳點餐、活動報到、課堂點名、問卷調查，
+      都可以透過一個小小的黑白圖形完成。
+    </p>
+
+    <p>
+      但當需求改變時，使用者往往還是必須重新尋找不同的平台。
+      想投票需要投票工具，想點餐需要點餐系統，
+      想辦活動又需要另外建立報名頁面。
+    </p>
+
+    <p>
+      這正是 QR∞ 團隊希望改變的地方。
+    </p>
+
+  </div>
+
+  
+
+</section>
+
+
+    <!-- ===== Technology ===== -->
+
+    <section id="technology">
+
+      <div class="section-label"></div>
+
+      <h2>為了一件事浪費自己的心力</h2>
+      <h3>
+        每天幫同事點飲料，都要一個一個問，不只浪費時間又很難沒有錯誤的紀錄訂單。
+
+        而且報名表單、問卷、簽到系統都在不同平台光是要找可以用好上手的就要花上好一陣子。
+      </h3>
+       
+
+      </div>
+
+    </section>
+
+
+    <!-- ===== Flow ===== -->
+
+    <section>
+
+      <div class="section-label"></div>
+
+      <h2>從一個想法，到一個可以使用的服務。</h2>
+
+      <h3>
+        QR∞ 讓使用者可以依照自己的需求，決定 QR Code 掃描之後的內容、流程與互動方式。
+        透過QR Code，使用者可以快速建立一個數位服務，並且在需要時隨時修改，不再需要人與人的交流，或是依賴不同平台的服務。
+
+        例如，今天要開個報名表單，只要從自己預設的流程中選擇「報名表單」功能，設定好欄位與內容，就可以生成一個 QR Code，掃描後就能填寫報名資訊。
+      </h3>
+
+
+    </section>
+
+
+    <!-- ===== QR Visual ===== -->
+
+    
+    <div class="quote">
+    「之前要幫老師們點飲料，都會打擾到正在開會的老師，直到我用了QR∞，
+    現在我只要拿出QR Code，他們就會自己掃碼，不用任何溝通，我就能點完所有人的飲料了。」
+    <small>—— QR∞ 使用者緊繃辣雞腿堡</small>
+  </div>
+<div class="quote">
+    「生為i人的我，最害怕人與人接觸，尤其是那些不在LINE群的人，不管什麼活動我都要去照顧到他們的意見，
+    自從用了QR∞，我就再也不用擔心了！我直接在投影機上放QR Code，他們就能自己掃碼填寫意見了!!!!」
+    <small>—— QR∞ 使用者賈斯汀比博</small>
+  </div>
+    <!-- ===== Data ===== -->
+
+    <section id="data">
+
+      <div class="section-label"></div>
+
+      <h2>QR∞ 正在改變<br>QR Code 的使用方式。</h2>
+
+      <div class="data-grid">
+
+        <div class="data">
+          <strong>100K+</strong>
+          <span>建立 QR 服務</span>
+        </div>
+
+        <div class="data">
+          <strong>35K+</strong>
+          <span>活躍使用者</span>
+        </div>
+
+        <div class="data">
+          <strong>2K+</strong>
+          <span>合作商家</span>
+        </div>
+
+        <div class="data">
+          <strong>42%</strong>
+          <span>互動率提升</span>
+        </div>
+
+      </div>
+
+      <p style="
+        color:#98a2b3;
+        font-size:13px;
+        margin-top:18px;
+      ">
+        ※以上數據為本次未來情境新聞報導之模擬數據，
+        並非實際營運統計。
+      </p>
+
+    </section>
+    <section>
+
+      <div class="qr-section">
+
+        <div>
+
+          <div class="section-label" style="color:#7c9cff;">
+            QR∞ CONCEPT
+          </div>
+
+          <h2>
+            不只是生成一個 QR Code。
+          </h2>
+
+          <p>
+            使用者可以決定內容、流程與互動方式，
+            讓 QR Code 從單純的連結，
+            變成真正的數位服務入口。
+          </p>
+          <a href="#" class="btn btn-primary">立即試用</a>
+        <a href="#" class="btn">了解更多</a>
+        
+        </div>
+
+        <div class="fake-qr"></div>
+
+      </div>
+
+    </section>
+
+    <!-- ===== Smart Commerce ===== -->
+
+    
+  <script>
+    // 滾動時讓內容淡入
+    const sections = document.querySelectorAll("section");
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+
+    sections.forEach(section => {
+      section.style.opacity = "0";
+      section.style.transform = "translateY(25px)";
+      section.style.transition = "opacity .7s ease, transform .7s ease";
+      observer.observe(section);
+    });
+  </script>
+
+</body>
+</html>
